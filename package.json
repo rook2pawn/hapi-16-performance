@@ -1,0 +1,16 @@
+{
+  "name": "faster-hapi-16",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "original": "./link-16-original.sh",
+    "faster": "./link-16-modified.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^16.6.2"
+  }
+}
