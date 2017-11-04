@@ -21,7 +21,10 @@
 
 # important! 
 
-## benchmarking is useless if you are bottlenecked by your TCP configurations!
+# TCP - Do this (explanation in TCP - READ )
+
+
+## TCP - read benchmarking is useless if you are bottlenecked by your TCP configurations!
 
 we want to amplify the basic behavior of the responding code so that means our new benchmark is 
 
