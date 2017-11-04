@@ -62,8 +62,6 @@ internals.Generator.prototype.decorate = function (property, method, options) {
 
 internals.Request = function (connection, req, res, options) {
 
-    console.log("REQUSET!!!");
-    debugger;
     Podium.decorateRequest(this, internals.emitter);
 
     // Take measurement as soon as possible
