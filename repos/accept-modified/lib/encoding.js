@@ -4,7 +4,7 @@
 
 const Boom = require('boom');
 const Hoek = require('hoek');
-
+const Memo = require('fast-memoize');
 
 // Declare internals
 
@@ -22,8 +22,9 @@ const internals = {};
     Accept-Encoding: compress;q=0.5, gzip;q=1.0
     Accept-Encoding: gzip;q=1.0, identity; q=0.5, *;q=0
 */
+//exports.encoding = function() { return "identity" }
 
-exports.encoding = function (header, preferences) {
+exports.encoding = Memo(function (header, preferences) {
 
     const encodings = exports.encodings(header, preferences);
     if (encodings.isBoom) {
@@ -31,8 +32,7 @@ exports.encoding = function (header, preferences) {
     }
 
     return encodings.length ? encodings[0] : '';
-};
-
+});
 
 exports.encodings = function (header, preferences) {
 

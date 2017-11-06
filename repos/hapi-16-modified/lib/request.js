@@ -104,7 +104,6 @@ internals.Request = function (connection, req, res, options) {
         connection._requestCounter.value = connection._requestCounter.min;
     }
 
-    debugger;
     this.app = (options.app ? Hoek.shallow(options.app) : {});              // Place for application-specific state without conflicts with hapi, should not be used by plugins
     this.plugins = (options.plugins ? Hoek.shallow(options.plugins) : {});  // Place for plugins to store state without conflicts with hapi, should be namespaced using plugin name
 
@@ -154,9 +153,7 @@ internals.Request = function (connection, req, res, options) {
     this._tailIds = 0;                  // Used to generate a unique tail id
     this._protect = new Protect(this);
     this.domain = this._protect.domain;
-
     // Encoding
-    debugger;
     this.info.acceptEncoding = this.connection._compression.accept(this);       // Delay until request object fully initialized
 
     // Listen to request state
@@ -291,7 +288,7 @@ internals.Request.prototype.log = function (tags, data, timestamp, _internal) {
 
 internals.Request.prototype._log = function (tags, data) {
 
-    return this.log(tags, data, null, true);
+    //return this.log(tags, data, null, true);
 };
 
 

@@ -77,3 +77,24 @@ Results
 	Processing:    13   16   4.3     14      68
 	Waiting:       13   16   4.3     14      68
 	Total:         13   16   4.3     14      69
+
+
+# hapi 16 (modified) 
+
+Command
+
+	ab -c 64 -n 100000 "http://127.0.0.1:3000/"
+
+
+Results
+
+	Requests per second:    4209.57 [#/sec] (mean)
+	Time per request:       15.203 [ms] (mean)
+	Time per request:       0.238 [ms] (mean, across all concurrent requests)
+	Transfer rate:          14655.37 [Kbytes/sec] received
+	Connection Times (ms)
+	              min  mean[+/-sd] median   max
+	Connect:        0    0   0.0      0       1
+	Processing:     2   15   4.1     13      39
+	Waiting:        1   15   4.1     13      39
+	Total:          3   15   4.1     13      39
