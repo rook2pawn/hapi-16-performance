@@ -155,7 +155,7 @@ internals.Request = function (connection, req, res, options) {
     this.domain = this._protect.domain;
 
     // Encoding
-
+    debugger;
     this.info.acceptEncoding = this.connection._compression.accept(this);       // Delay until request object fully initialized
 
     // Listen to request state
@@ -170,7 +170,7 @@ internals.Request = function (connection, req, res, options) {
         agent: this.raw.req.headers['user-agent']
     };
 
-    this._log(['received'], about, now);     // Must be last for object to be fully constructed
+    //this._log(['received'], about, now);     // Must be last for object to be fully constructed
 };
 
 Hoek.inherits(internals.Request, Podium);
@@ -183,7 +183,8 @@ internals.Request.prototype._listenRequest = function () {
         this._isPayloadPending = false;
     };
 
-    this.raw.req.once('end', this._onEnd);
+//    this.raw.req.once('end', this._onEnd);
+    this.raw.req.on('end', this._onEnd);
 
     this._onClose = () => {
 
@@ -192,7 +193,8 @@ internals.Request.prototype._listenRequest = function () {
         this._isBailed = true;
     };
 
-    this.raw.req.once('close', this._onClose);
+//    this.raw.req.once('close', this._onClose);
+    this.raw.req.on('close', this._onClose);
 
     this._onError = (err) => {
 
@@ -200,7 +202,8 @@ internals.Request.prototype._listenRequest = function () {
         this._isPayloadPending = false;
     };
 
-    this.raw.req.once('error', this._onError);
+//    this.raw.req.once('error', this._onError);
+    this.raw.req.on('error', this._onError);
 
     this._onAbort = () => {
 
@@ -211,7 +214,8 @@ internals.Request.prototype._listenRequest = function () {
         this.emit('disconnect');
     };
 
-    this.raw.req.once('aborted', this._onAbort);
+//    this.raw.req.once('aborted', this._onAbort);
+    this.raw.req.on('aborted', this._onAbort);
 };
 
 
@@ -253,7 +257,10 @@ internals.Request.prototype._setUrl = function (url, stripTrailingSlash) {
 
 internals.Request.prototype._setMethod = function (method) {
 
-    Hoek.assert(method && typeof method === 'string', 'Missing method');
+    //Hoek.assert(method && typeof method === 'string', 'Missing method');
+    if (!method) {
+        throw new Error("Missing method");
+    }
     this.method = method.toLowerCase();
 };
 
