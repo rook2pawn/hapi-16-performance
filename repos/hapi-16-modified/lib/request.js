@@ -104,6 +104,7 @@ internals.Request = function (connection, req, res, options) {
         connection._requestCounter.value = connection._requestCounter.min;
     }
 
+    debugger;
     this.app = (options.app ? Hoek.shallow(options.app) : {});              // Place for application-specific state without conflicts with hapi, should not be used by plugins
     this.plugins = (options.plugins ? Hoek.shallow(options.plugins) : {});  // Place for plugins to store state without conflicts with hapi, should be namespaced using plugin name
 
