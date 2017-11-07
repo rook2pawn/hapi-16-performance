@@ -36,7 +36,7 @@ Results
 
 
 
-# hapi 14 
+# hapi 14 (original)
 
 Command
 
@@ -56,6 +56,21 @@ Results
 	Waiting:       10   13   4.3     11      48
 	Total:         10   13   4.3     11      49
 
+# hapi 14 (no domains)
+
+Results
+
+	Requests per second:    6188.22 [#/sec] (mean)
+	Time per request:       10.342 [ms] (mean)
+	Time per request:       0.162 [ms] (mean, across all concurrent requests)
+	Transfer rate:          21404.97 [Kbytes/sec] received
+	Connection Times (ms)
+	              min  mean[+/-sd] median   max
+	Connect:        0    0   0.0      0       1
+	Processing:     1   10   3.7      9      36
+	Waiting:        1   10   3.7      9      36
+	Total:          3   10   3.7      9      36
+
 
 # hapi 16 (original)
 
@@ -67,16 +82,58 @@ Command
 
 Results
 
-	Requests per second:    3894.32 [#/sec] (mean)
-	Time per request:       16.434 [ms] (mean)
-	Time per request:       0.257 [ms] (mean, across all concurrent requests)
-	Transfer rate:          13557.87 [Kbytes/sec] received
+	Requests per second:    4075.37 [#/sec] (mean)
+	Time per request:       15.704 [ms] (mean)
+	Time per request:       0.245 [ms] (mean, across all concurrent requests)
+	Transfer rate:          14188.19 [Kbytes/sec] received
 	Connection Times (ms)
 	              min  mean[+/-sd] median   max
-	Connect:        0    0   0.0      0       2
-	Processing:    13   16   4.3     14      68
-	Waiting:       13   16   4.3     14      68
-	Total:         13   16   4.3     14      69
+	Connect:        0    0   0.0      0       1
+	Processing:     2   16   3.7     14      34
+	Waiting:        1   16   3.7     14      34
+	Total:          3   16   3.7     14      34
+
+
+
+# hapi 16 (original - no domains)
+
+Command
+
+	ab -c 64 -n 100000 "http://127.0.0.1:3000/"
+
+Results
+
+	Requests per second:    5285.94 [#/sec] (mean)
+	Time per request:       12.108 [ms] (mean)
+	Time per request:       0.189 [ms] (mean, across all concurrent requests)
+	Transfer rate:          18402.71 [Kbytes/sec] received
+	Connection Times (ms)
+	              min  mean[+/-sd] median   max
+	Connect:        0    0   0.0      0       1
+	Processing:     3   12   3.7     10      35
+	Waiting:        3   12   3.7     10      34
+	Total:          4   12   3.7     10      35
+
+
+# hapi 16 (modified - no domains)
+
+Command
+
+	ab -c 64 -n 100000 "http://127.0.0.1:3000/"
+
+Results
+
+	Requests per second:    5446.11 [#/sec] (mean)
+	Time per request:       11.751 [ms] (mean)
+	Time per request:       0.184 [ms] (mean, across all concurrent requests)
+	Transfer rate:          18960.35 [Kbytes/sec] received
+	Connection Times (ms)
+	              min  mean[+/-sd] median   max
+	Connect:        0    0   0.0      0       1
+	Processing:     1   12   3.9     10      35
+	Waiting:        1   12   3.9     10      35
+	Total:          3   12   3.9     10      35
+
 
 
 # hapi 16 (modified) 
@@ -88,13 +145,13 @@ Command
 
 Results
 
-	Requests per second:    4209.57 [#/sec] (mean)
-	Time per request:       15.203 [ms] (mean)
-	Time per request:       0.238 [ms] (mean, across all concurrent requests)
-	Transfer rate:          14655.37 [Kbytes/sec] received
+	Requests per second:    4169.51 [#/sec] (mean)
+	Time per request:       15.350 [ms] (mean)
+	Time per request:       0.240 [ms] (mean, across all concurrent requests)
+	Transfer rate:          14515.91 [Kbytes/sec] received
 	Connection Times (ms)
 	              min  mean[+/-sd] median   max
 	Connect:        0    0   0.0      0       1
-	Processing:     2   15   4.1     13      39
-	Waiting:        1   15   4.1     13      39
-	Total:          3   15   4.1     13      39
+	Processing:     2   15   4.5     13      39
+	Waiting:        2   15   4.5     13      39
+	Total:          3   15   4.5     13      39

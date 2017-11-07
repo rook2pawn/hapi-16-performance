@@ -150,24 +150,10 @@ internals.Podium.prototype.emit = function (criteria, data, callback) {
 
 internals.Podium.prototype._emit = function (criteria, data, generated, callback) {
 
-    criteria = internals.criteria(criteria);
-
     const name = criteria.name;
-    Hoek.assert(name, 'Criteria missing event name');
-
     const event = this._eventListeners[name];
-    Hoek.assert(event, `Unknown event ${name}`);
-    Hoek.assert(!event.flags.spread || Array.isArray(data) || typeof data === 'function', 'Data must be an array for spread event');
-    Hoek.assert(!criteria.channel || typeof criteria.channel === 'string', 'Invalid channel name');
-    Hoek.assert(!criteria.channel || !event.flags.channels || event.flags.channels.indexOf(criteria.channel) !== -1, `Unknown ${criteria.channel} channel`);
 
-    if (typeof criteria.tags === 'string') {
-        criteria.tags = [criteria.tags];
-    }
-
-    if (criteria.tags &&
-        Array.isArray(criteria.tags)) {
-
+    if (criteria.tags) {
         criteria.tags = Hoek.mapToObject(criteria.tags);
     }
 
@@ -189,8 +175,8 @@ internals.emit = function (emitter, notification) {
 
     emitter._eventsProcessing = true;
     const item = emitter._notificationsQueue.shift();
-
-    const event = emitter._eventListeners[item.criteria.name];
+    const name = item.criteria.name || item.criteria;
+    const event = emitter._eventListeners[name];
     const handlers = event.handlers;
 
     const finalize = () => {

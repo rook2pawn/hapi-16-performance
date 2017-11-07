@@ -9,7 +9,9 @@ Aenean viverra luctus pharetra. Duis bibendum dui et erat euismod malesuada. Pro
 
 const Hapi = require('hapi');
 
-const server = new Hapi.Server();
+const server = new Hapi.Server({
+  useDomains : true
+});
 server.connection({ port: 3000, host: 'localhost' });
 
 server.route({
