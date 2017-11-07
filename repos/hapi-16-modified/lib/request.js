@@ -167,7 +167,7 @@ internals.Request = function (connection, req, res, options) {
         url: this.url.href,
         agent: this.raw.req.headers['user-agent']
     };
-
+    debugger;
     this._log(['received'], about, now);     // Must be last for object to be fully constructed
 };
 
