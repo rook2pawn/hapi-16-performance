@@ -1,5 +1,6 @@
 # results
 
+Results of serving a medium sized piece of [text](/server.js#L3).
 
 |                     | Vanilla Node v8.9.0 | Hapi 17 | Hapi 14 (No Domains) |
 | ------------------- | ------------- | ------------- | -------------------- |
@@ -23,10 +24,6 @@
 	ss -tapo4 (t for TCP, a for all states,  p for show connected process, 4 for ipv4)
 
 # vanilla (establishing an upper bound)
-
-	require('http').createServer((req,res) => {
-	  res.end();
-	}).listen(3000);
 
 Command
 

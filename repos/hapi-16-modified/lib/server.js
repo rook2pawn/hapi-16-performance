@@ -1,5 +1,5 @@
 'use strict';
-
+console.log("SERVER!");
 // Load modules
 
 const Catbox = require('catbox');
@@ -18,7 +18,7 @@ const Promises = require('./promises');
 const Reply = require('./reply');
 const Request = require('./request');
 const Schema = require('./schema');
-
+console.log("Finished requires!");
 
 // Declare internals
 
@@ -74,7 +74,6 @@ exports = module.exports = internals.Server = function (options) {
 
     // Subscribe to server log events
 
-    debugger;
     if (this._settings.debug) {
         const debug = (request, event) => {
 

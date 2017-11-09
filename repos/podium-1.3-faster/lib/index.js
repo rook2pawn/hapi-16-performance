@@ -39,6 +39,8 @@ internals.schema.listener = internals.schema.event.keys({
 
 
 exports = module.exports = internals.Podium = function (events) {
+    this.id = ~~(Math.random() * 1000)
+    //console.log("New Podium!:", this.id, events);
 
     // Use descriptive names to avoid conflict when inherited
 
@@ -56,6 +58,7 @@ exports = module.exports = internals.Podium = function (events) {
 
 internals.Podium.decorateRequest = function (target, source) {
 
+    //console.log("podium decorate Request, source:", source);
     internals.Podium.call(target, null);
 
     target._eventListeners.disconnect = {
@@ -74,6 +77,7 @@ internals.Podium.decorateRequest = function (target, source) {
 
 
 internals.Podium.decorate = function (target, source) {
+    //console.log("podium decorate , source:", source);
 
     internals.Podium.call(target, null);
 
@@ -89,7 +93,7 @@ internals.Podium.decorate = function (target, source) {
 
 internals.Podium.prototype.registerEvent = function (events) {
 
-//    console.log("RegisterEvent:", events);
+    //console.log(this.id, "Podium RegisterEvent:", events);
 
     events = Hoek.flatten([].concat(events));
     events.forEach((event) => {
@@ -127,7 +131,7 @@ internals.Podium.prototype.registerEvent = function (events) {
 
 internals.Podium.prototype.registerPodium = function (podiums) {
 
-//    console.log("register podium:", podiums);
+    //console.log(this.id, "Podium registerPodium");
     [].concat(podiums).forEach((podium) => {
 
         if (podium._sourcePodiums.indexOf(this) !== -1) {
@@ -147,7 +151,7 @@ internals.Podium.prototype.registerPodium = function (podiums) {
 
 internals.Podium.prototype.emit = function (criteria, data, callback) {
 
-//    console.log("EMIT!:", criteria, " data:", data);
+    //console.log(this.id, "Podium emit:", criteria);
     return this._emit(criteria, data, false, callback);
 };
 
@@ -259,7 +263,7 @@ internals.emit = function (emitter, notification) {
             if (func) {
                 args.push(func);
             }
-
+            //console.log(this.id, "Podium Handler args:", args);
             internals.handler(handler, args, emitter);
         };
 
@@ -313,6 +317,8 @@ internals.emitEmitter = function (emitter) {
 
 
 internals.Podium.prototype.on = internals.Podium.prototype.addListener = function (criteria, listener) {
+
+    //console.log(this.id, "Podium ON ", criteria,listener.toString());
 
     criteria = internals.criteria(criteria);
     criteria.listener = listener;

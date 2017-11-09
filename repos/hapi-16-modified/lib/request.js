@@ -168,7 +168,7 @@ internals.Request = function (connection, req, res, options) {
         agent: this.raw.req.headers['user-agent']
     };
 
-//    this._log(['received'], about, now);     // Must be last for object to be fully constructed
+     this._log(['received'], about, now);     // Must be last for object to be fully constructed
 };
 
 Hoek.inherits(internals.Request, Podium);
@@ -281,7 +281,8 @@ internals.Request.prototype.log = function (tags, data, timestamp, _internal) {
 
         this._logger.push(update[1]);       // Add to request array
     }
-
+//    console.log("Emitting",{ name: internal ? 'request-internal' : 'request', tags }, update.length )
+//    debugger;
     this.connection.emit({ name: internal ? 'request-internal' : 'request', tags }, update);
 };
 
