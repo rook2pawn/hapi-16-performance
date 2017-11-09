@@ -22,18 +22,23 @@ const internals = {};
     Accept-Encoding: compress;q=0.5, gzip;q=1.0
     Accept-Encoding: gzip;q=1.0, identity; q=0.5, *;q=0
 */
-exports.encoding = function() { return "identity" }
-/*
-exports.encoding = Memo(function (header, preferences) {
 
+exports.encoding = Memo(function (header, preferences) {
+//    console.log("Accept-Encoding header:", header, "Preferences:", preferences);
     const encodings = exports.encodings(header, preferences);
+//    console.log("Encodings:", encodings);
     if (encodings.isBoom) {
         return encodings;
     }
 
+    var output = encodings.length ? encodings[0] : '';
+//    console.log("Output:", output);
     return encodings.length ? encodings[0] : '';
 });
-*/
+
+//exports.encoding = function() { return "identity" }
+
+
 exports.encodings = function (header, preferences) {
 
     Hoek.assert(!preferences || Array.isArray(preferences), 'Preferences must be an array');

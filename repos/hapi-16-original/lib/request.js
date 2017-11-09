@@ -169,7 +169,7 @@ internals.Request = function (connection, req, res, options) {
         agent: this.raw.req.headers['user-agent']
     };
 
-    this._log(['received'], about, now);     // Must be last for object to be fully constructed
+    //this._log(['received'], about, now);     // Must be last for object to be fully constructed
 };
 
 Hoek.inherits(internals.Request, Podium);

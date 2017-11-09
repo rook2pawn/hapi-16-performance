@@ -7,9 +7,15 @@ Results of serving a medium sized piece of [text](/server.js#L3).
 | Requests Per second | 21073.95  | 9393.69  | 6188.22
 
 
-|                     | Hapi 16 (No Domains) | Hapi 16 (Modified, No Domains, No Log) |
+|                     | Hapi 16 (No Domains, No Log) | Hapi 16 (Modified, No Domains, No Log) |
 | ------------------- | -------------------- | -------------------------------------- |
 | Requests Per second | 5285.94              | 5729.25                                |
+
+
+
+| Accept-Encodings    | Hapi 14 (No Domains, no log) | Hapi 16 (No Domains, No Log) | Hapi 16 (Modified, No Domains, No Log) |
+| ------------------- | ---------------------------- | ---------------------------- | -------------------------------------- |
+| Requests Per second | 4274.58                      | 4091.83                      | 5203.50                      |
 
 
 
@@ -99,6 +105,48 @@ Results
 	Waiting:        1   10   3.7      9      36
 	Total:          3   10   3.7      9      36
 
+# hapi 14 (no domains, no log)
+
+Command
+
+	ab -c 64 -n 100000 -H "Accept-Encoding: gzip, deflate, br" "http://127.0.0.1:3000/"
+
+
+Results
+
+	Requests per second:    4274.58 [#/sec] (mean)
+	Time per request:       14.972 [ms] (mean)
+	Time per request:       0.234 [ms] (mean, across all concurrent requests)
+	Transfer rate:          6441.09 [Kbytes/sec] received
+	Connection Times (ms)
+	              min  mean[+/-sd] median   max
+	Connect:        0    0   0.1      0       2
+	Processing:     6   15   4.8     13      57
+	Waiting:        5   12   4.1     10      47
+	Total:          6   15   4.8     13      58
+
+
+# hapi 14 (no domains, no log, memoized encoding only)
+
+Command
+
+	ab -c 64 -n 100000 -H "Accept-Encoding: gzip, deflate, br" "http://127.0.0.1:3000/"
+
+
+
+Results
+
+	Requests per second:    4618.31 [#/sec] (mean)
+	Time per request:       13.858 [ms] (mean)
+	Time per request:       0.217 [ms] (mean, across all concurrent requests)
+	Transfer rate:          6959.03 [Kbytes/sec] received
+	Connection Times (ms)
+	              min  mean[+/-sd] median   max
+	Connect:        0    0   0.1      0       3
+	Processing:     6   14   4.6     12      41
+	Waiting:        4   11   3.2     10      35
+	Total:          6   14   4.6     12      41
+
 
 # hapi 16 (original)
 
@@ -143,6 +191,30 @@ Results
 	Total:          4   12   3.7     10      35
 
 
+
+# hapi 16 (original - no domains, no log)
+
+Command
+
+	ab -c 64 -n 100000 -H "Accept-Encoding: gzip, deflate, br" "http://127.0.0.1:3000/"
+
+
+Results
+
+	Requests per second:    4091.83 [#/sec] (mean)
+	Time per request:       15.641 [ms] (mean)
+	Time per request:       0.244 [ms] (mean, across all concurrent requests)
+	Transfer rate:          6165.71 [Kbytes/sec] received
+	Connection Times (ms)
+	              min  mean[+/-sd] median   max
+	Connect:        0    0   0.1      0       1
+	Processing:     8   16   4.1     14      34
+	Waiting:        7   12   3.4     11      32
+	Total:          8   16   4.1     14      34
+
+
+
+
 # hapi 16 (modified - no domains)
 
 Command
@@ -161,7 +233,6 @@ Results
 	Processing:     1   12   3.9     10      35
 	Waiting:        1   12   3.9     10      35
 	Total:          3   12   3.9     10      35
-
 
 
 # hapi 16 (modified)
@@ -188,19 +259,18 @@ Results
 
 Command
 
-	ab -c 64 -n 100000 "http://127.0.0.1:3000/"
+	ab -c 64 -n 100000 -H "Accept-Encoding: gzip, deflate, br" "http://127.0.0.1:3000/"
 
 
 Results
 
-	Requests per second:    5729.25 [#/sec] (mean)
-	Time per request:       11.171 [ms] (mean)
-	Time per request:       0.175 [ms] (mean, across all concurrent requests)
-	Transfer rate:          19946.08 [Kbytes/sec] received
-
+	Requests per second:    5203.50 [#/sec] (mean)
+	Time per request:       12.299 [ms] (mean)
+	Time per request:       0.192 [ms] (mean, across all concurrent requests)
+	Transfer rate:          18115.70 [Kbytes/sec] received
 	Connection Times (ms)
 	              min  mean[+/-sd] median   max
 	Connect:        0    0   0.0      0       1
-	Processing:     8   11   3.5      9      36
-	Waiting:        8   11   3.5      9      36
-	Total:          8   11   3.5      9      36
+	Processing:     2   12   3.5     10      33
+	Waiting:        1   12   3.5     10      33
+	Total:          3   12   3.5     10      33
