@@ -1,9 +1,21 @@
 # results
 
+
+|                     | Vanilla Node v8.9.0 | Hapi 17 | Hapi 14 (No Domains) |
+| ------------------- | ------------- | ------------- | -------------------- |
+| Requests Per second | 21073.95  | 9393.69  | 6188.22
+
+
+|                     | Hapi 16 (No Domains) | Hapi 16 (Modified, No Domains, No Log) |
+| ------------------- | -------------------- | -------------------------------------- |
+| Requests Per second | 5285.94              | 5729.25                                |
+
+
+
 # important! - eliminate as much TCP bottlenecking - TCP initial configuration
 
 	sysctl net.ipv4.tcp_tw_recycle=1
-	sysctl net.ipv4.tcp_tw_reuse=1 
+	sysctl net.ipv4.tcp_tw_reuse=1
 	sysctl net.core.somaxconn=1024
 
 	// and results of the following line should be empty
@@ -13,7 +25,7 @@
 # vanilla (establishing an upper bound)
 
 	require('http').createServer((req,res) => {
-	  res.end(); 
+	  res.end();
 	}).listen(3000);
 
 Command
@@ -34,14 +46,14 @@ Results
 	Total:          2    3   0.3      3       6
 
 
-# hapi 17 
+# hapi 17
 
 Command
 
 	ab -c 64 -n 100000 "http://127.0.0.1:3000/"
 
 
-Results 
+Results
 
 	Requests per second:    9393.69 [#/sec] (mean)
 	Time per request:       6.813 [ms] (mean)
@@ -62,7 +74,7 @@ Command
 	ab -c 64 -n 100000 "http://127.0.0.1:3000/"
 
 
-Results 
+Results
 
 	Requests per second:    4875.84 [#/sec] (mean)
 	Time per request:       13.126 [ms] (mean)
@@ -155,7 +167,7 @@ Results
 
 
 
-# hapi 16 (modified) 
+# hapi 16 (modified)
 
 Command
 
@@ -174,3 +186,24 @@ Results
 	Processing:     2   15   4.5     13      39
 	Waiting:        2   15   4.5     13      39
 	Total:          3   15   4.5     13      39
+
+# hapi 16 (modified, no domains, no log - podium)
+
+Command
+
+	ab -c 64 -n 100000 "http://127.0.0.1:3000/"
+
+
+Results
+
+	Requests per second:    5729.25 [#/sec] (mean)
+	Time per request:       11.171 [ms] (mean)
+	Time per request:       0.175 [ms] (mean, across all concurrent requests)
+	Transfer rate:          19946.08 [Kbytes/sec] received
+
+	Connection Times (ms)
+	              min  mean[+/-sd] median   max
+	Connect:        0    0   0.0      0       1
+	Processing:     8   11   3.5      9      36
+	Waiting:        8   11   3.5      9      36
+	Total:          8   11   3.5      9      36

@@ -89,6 +89,8 @@ internals.Podium.decorate = function (target, source) {
 
 internals.Podium.prototype.registerEvent = function (events) {
 
+//    console.log("RegisterEvent:", events);
+
     events = Hoek.flatten([].concat(events));
     events.forEach((event) => {
 
@@ -125,6 +127,7 @@ internals.Podium.prototype.registerEvent = function (events) {
 
 internals.Podium.prototype.registerPodium = function (podiums) {
 
+//    console.log("register podium:", podiums);
     [].concat(podiums).forEach((podium) => {
 
         if (podium._sourcePodiums.indexOf(this) !== -1) {
@@ -144,6 +147,7 @@ internals.Podium.prototype.registerPodium = function (podiums) {
 
 internals.Podium.prototype.emit = function (criteria, data, callback) {
 
+//    console.log("EMIT!:", criteria, " data:", data);
     return this._emit(criteria, data, false, callback);
 };
 

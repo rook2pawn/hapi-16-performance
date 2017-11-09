@@ -139,7 +139,7 @@ internals.Request = function (connection, req, res, options) {
     this.tail = this.addTail = this._addTail;       // Removed once wagging
 
     // Private members
-    
+
     this._states = {};
     this._entity = {};                  // Entity information set via reply.entity()
     this._logger = [];
@@ -167,8 +167,8 @@ internals.Request = function (connection, req, res, options) {
         url: this.url.href,
         agent: this.raw.req.headers['user-agent']
     };
-    debugger;
-    this._log(['received'], about, now);     // Must be last for object to be fully constructed
+
+//    this._log(['received'], about, now);     // Must be last for object to be fully constructed
 };
 
 Hoek.inherits(internals.Request, Podium);

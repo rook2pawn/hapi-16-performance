@@ -22,8 +22,8 @@ const internals = {};
     Accept-Encoding: compress;q=0.5, gzip;q=1.0
     Accept-Encoding: gzip;q=1.0, identity; q=0.5, *;q=0
 */
-//exports.encoding = function() { return "identity" }
-
+exports.encoding = function() { return "identity" }
+/*
 exports.encoding = Memo(function (header, preferences) {
 
     const encodings = exports.encodings(header, preferences);
@@ -33,7 +33,7 @@ exports.encoding = Memo(function (header, preferences) {
 
     return encodings.length ? encodings[0] : '';
 });
-
+*/
 exports.encodings = function (header, preferences) {
 
     Hoek.assert(!preferences || Array.isArray(preferences), 'Preferences must be an array');

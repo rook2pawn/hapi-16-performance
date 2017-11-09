@@ -74,6 +74,7 @@ exports = module.exports = internals.Server = function (options) {
 
     // Subscribe to server log events
 
+    debugger;
     if (this._settings.debug) {
         const debug = (request, event) => {
 
